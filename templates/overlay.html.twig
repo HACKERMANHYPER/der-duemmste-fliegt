@@ -117,7 +117,7 @@
                             localStorage.setItem('{{ creator.name }}_voted_for', "-1");
                             localStorage.setItem('{{ creator.name }}_votes', data.votes);
                             localStorage.setItem('{{ creator.name }}_lives', data.lives);
-                            localStorage.setItem('show_votes', {{ show_votes ? "true" : "false"}});
+                            {# localStorage.setItem('show_votes', {{ show_votes ? "true" : "false"}}); #}
                             updateVotes();
                         }
                         localStorage.setItem('{{ creator.name }}_voted_for', "-1");
@@ -126,13 +126,13 @@
                         localStorage.setItem('{{ creator.name }}_voted_for', data.voted_for.id);
                         localStorage.setItem('{{ creator.name }}_votes', data.votes);
                         localStorage.setItem('{{ creator.name }}_lives', data.lives);
-                        localStorage.setItem('show_votes', {{ show_votes ? "true" : "false"}});
+                        {#localStorage.setItem('show_votes', {{ show_votes ? "true" : "false"}}); #}
                         updateVotes();
                     }
                     else if(data.votes.toString() !== localStorage.getItem('{{ creator.name }}_votes')) {
                         localStorage.setItem('{{ creator.name }}_votes', data.votes);
                         localStorage.setItem('{{ creator.name }}_lives', data.lives);
-                        localStorage.setItem('show_votes', {{ show_votes ? "true" : "false"}});
+                        {# localStorage.setItem('show_votes', {{ show_votes ? "true" : "false"}}); #}
                         updateVotes();
                     }
                 }).catch(error => {
@@ -162,7 +162,7 @@
             localStorage.setItem('{{ creator.name }}_lives', {{ creator.lives }});
             localStorage.setItem('{{ creator.name }}_votes', {{ creator.votedby|length }});
             localStorage.setItem('{{ creator.name }}_voted_for', {{ (creator.votedFor == null) ? "-1" : creator.votedFor.id }});
-            localStorage.setItem('show_votes', {{ show_votes ? "true" : "false"}});
+            {#localStorage.setItem('show_votes', {{ show_votes ? "true" : "false"}}); #}
         });
     </script>
 </head>

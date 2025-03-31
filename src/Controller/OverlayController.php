@@ -33,7 +33,7 @@ class OverlayController extends AbstractController
         }
 
         # Get the global setting "show_votes"
-        $show_votes = $entityManager->getRepository(GlobalSetting::class)->findOneBy(["name" => "show_votes"])->getValue() == "1";
+        // $show_votes = $entityManager->getRepository(GlobalSetting::class)->findOneBy(["name" => "show_votes"])->getValue() == "1";
 
         return $this->render('overlay.html.twig', [
             'width' => 500,
@@ -41,7 +41,7 @@ class OverlayController extends AbstractController
             'creator' => $creator,
             'max_lives' => Constants::$MAX_LIVES,
             'debug' => "false",
-            'show_votes' => $show_votes
+            // 'show_votes' => $show_votes
         ]);
     }
 

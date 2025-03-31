@@ -19,13 +19,17 @@ final class Version20240502194733 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE creator CHANGE lifes lives INT DEFAULT 3 NOT NULL');
+        // Ändere die Spalte 'lifes' zu 'lives' und setze Standardwert und NOT NULL
+        $this->addSql('ALTER TABLE creator RENAME COLUMN lifes TO lives');
+        $this->addSql('ALTER TABLE creator ALTER COLUMN lives SET DEFAULT 3');
+        $this->addSql('ALTER TABLE creator ALTER COLUMN lives SET NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE creator CHANGE lives lifes INT DEFAULT 3 NOT NULL');
+        // Setze die Änderungen im Down-Methoden rückgängig
+        $this->addSql('ALTER TABLE creator ALTER COLUMN lives DROP NOT NULL');
+        $this->addSql('ALTER TABLE creator ALTER COLUMN lives DROP DEFAULT');
+        $this->addSql('ALTER TABLE creator RENAME COLUMN lives TO lifes');
     }
 }

@@ -43,7 +43,7 @@ class AjaxController extends AbstractController
         $r['name'] = $creator->getName();
         $r['votes'] = count($creator->getVotedBy());
         $show_votes = $entityManager->getRepository(GlobalSetting::class)->findOneBy(["name" => "show_votes"]);
-        $r['show_votes'] = $show_votes->getValue() == "1";
+        // $r['show_votes'] = $show_votes->getValue() == "1";
         if($creator->getVotedFor() != null) {
             $r['voted_for'] = [];
             $r['voted_for']['name'] = $creator->getVotedFor()->getName();
@@ -92,7 +92,7 @@ class AjaxController extends AbstractController
         if($user instanceof Response) return $user;
         # Check setting
         $allow_voting = $entityManager->getRepository(GlobalSetting::class)->findOneBy(["name" => "allow_voting"]);
-        if($allow_voting->getValue() == "0") return new JsonResponse(['message' => "Error, voting is disabled at the moment"], 400);
+        // if($allow_voting->getValue() == "0") return new JsonResponse(['message' => "Error, voting is disabled at the moment"], 400);
         if($user->getVotedFor() != null) return new JsonResponse(['message' => "Error, already voted"], 400);
         if($voted_for->getId() == $user->getId()) return new JsonResponse(['message' => "Error, cannot vote for self"], 400);
         if($voted_for->getId() <= 1) return new JsonResponse(['message' => "Error, cannot vote for this player"], 400);
