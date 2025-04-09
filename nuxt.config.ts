@@ -8,6 +8,11 @@ export default defineNuxtConfig({
     ],
     devtools: { enabled: true },
     css: ['~/assets/css/tailwind.css'],
+    routeRules: {
+        '/': { appMiddleware: ['auth'] },
+        '/test': { appMiddleware: ['auth'] },
+        '/login': { appMiddleware: ['auth'] },
+    },
     compatibilityDate: '2024-04-03',
     eslint: {
         config: {

@@ -1,19 +1,29 @@
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 
 export const usePlayer = () => {
+    // Nutze useState für SSR-Kompatibilität
+    const currentPlayer = useState('currentPlayer', () => null);
     const client = useSupabaseClient();
-    const currentPlayer = ref(null);
 
-    // Prüfe ob Nickname bereits existiert
-    const checkNicknameExists = async (nickname: string) => {
-        const { data } = await client
-            .from('player')
-            .select('*')
-            .eq('nickname', nickname)
-            .single();
-        return !!data;
+    // Session Management
+    const initSession = async () => {
+        if (import.meta.client) {
+            const sessionId = sessionStorage.getItem('playerSessionId');
+            if (sessionId && !currentPlayer.value) {
+                const { data } = await client
+                    .from('player')
+                    .select('*')
+                    .eq('session_id', sessionId)
+                    .single();
+
+                if (data) {
+                    currentPlayer.value = data;
+                }
+            }
+        }
     };
 
+    // Login
     const login = async (nickname: string) => {
         try {
             const { data, error } = await client
@@ -26,7 +36,9 @@ export const usePlayer = () => {
             if (!data) return { success: false, error: 'Spieler nicht gefunden' };
 
             currentPlayer.value = data;
-            localStorage.setItem('playerSessionId', data.session_id);
+            if (import.meta.client) {
+                sessionStorage.setItem('playerSessionId', data.session_id);
+            }
             return { success: true };
         }
         catch (error) {
@@ -35,20 +47,24 @@ export const usePlayer = () => {
         }
     };
 
+    // Register
     const register = async (nickname: string) => {
         try {
-            // Prüfe ob Nickname bereits existiert
-            const exists = await checkNicknameExists(nickname);
-            if (exists) {
-                return { success: false, error: 'Dieser Nickname ist bereits vergeben' };
+            const { data: existing } = await client
+                .from('player')
+                .select('nickname')
+                .eq('nickname', nickname)
+                .single();
+
+            if (existing) {
+                return { success: false, error: 'Nickname bereits vergeben' };
             }
 
-            // Erstelle neuen Spieler
             const { data, error } = await client
                 .from('player')
                 .insert([{
-                    nickname: nickname,
-                    session_id: crypto.randomUUID(), // Generiere eine neue session_id
+                    nickname,
+                    session_id: crypto.randomUUID(),
                 }])
                 .select()
                 .single();
@@ -56,7 +72,9 @@ export const usePlayer = () => {
             if (error) throw error;
 
             currentPlayer.value = data;
-            localStorage.setItem('playerSessionId', data.session_id);
+            if (import.meta.client) {
+                sessionStorage.setItem('playerSessionId', data.session_id);
+            }
             return { success: true };
         }
         catch (error) {
@@ -65,26 +83,18 @@ export const usePlayer = () => {
         }
     };
 
+    // Logout
     const logout = () => {
         currentPlayer.value = null;
-        localStorage.removeItem('playerSessionId');
+        if (import.meta.client) {
+            sessionStorage.removeItem('playerSessionId');
+        }
     };
 
-    // Lade gespeicherte Session beim Start
-    onMounted(async () => {
-        const sessionId = localStorage.getItem('playerSessionId');
-        if (sessionId) {
-            const { data } = await client
-                .from('player')
-                .select('*')
-                .eq('session_id', sessionId)
-                .single();
-
-            if (data) {
-                currentPlayer.value = data;
-            }
-        }
-    });
+    // Initialize session on client
+    if (import.meta.client) {
+        initSession();
+    }
 
     return {
         currentPlayer,
