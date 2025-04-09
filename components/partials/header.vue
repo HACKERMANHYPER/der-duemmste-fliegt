@@ -1,5 +1,5 @@
 <template>
-    <div class="flex w-full justify-around border bg-primary-200">
+    <div class="flex w-full justify-around border bg-primary-200 text-primary-600">
         <div class="w-3/4 float-start">
             LOGO
         </div>
@@ -17,7 +17,7 @@
             <NuxtLink
                 to="/"
             >
-                Lukas stinkt
+                More
             </NuxtLink>
         </div>
     </div>

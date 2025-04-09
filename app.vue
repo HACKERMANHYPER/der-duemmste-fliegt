@@ -1,12 +1,5 @@
 <template>
-    <div class="p-5">
-        <Header />
+    <NuxtLayout>
         <NuxtPage />
-        <Footer />
-    </div>
+    </NuxtLayout>
 </template>
-
-<script setup>
-import Header from '~/components/partials/header.vue';
-import Footer from '~/components/partials/footer.vue';
-</script>

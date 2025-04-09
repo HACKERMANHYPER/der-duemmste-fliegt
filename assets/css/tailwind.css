@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Base Styles */
+@layer base {
+    body {
+        @apply bg-primary-600 font-bodyfam text-primary-50;
+    }
+
+    .headline1 {
+        @apply text-xl font-displayfamFirst;
+    }
+    .headline2 {
+        @apply text-xl font-displayfamSecondary;
+    }
+
+}
+
+/* Custom Component Styles */
+@layer components {
+    .btn-primary {
+    @apply bg-primary text-white px-4 py-2 rounded-lg shadow-md;
+    }
+
+    .card {
+    @apply bg-white p-4 rounded-lg shadow-lg;
+    }
+}
+
+/* Custom Utility Styles */
+@layer utilities {
+    /* Beispiel: Benutzerdefinierte Flex Utilities */
+    .flex-center-custom {
+        @apply flex justify-center items-center;
+    }
+}

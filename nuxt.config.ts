@@ -1,8 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    modules: ['@nuxtjs/tailwindcss', '@nuxt/eslint', '@pinia/nuxt'],
+    modules: [
+        '@nuxtjs/tailwindcss',
+        '@nuxt/eslint',
+        '@pinia/nuxt',
+        '@nuxtjs/supabase',
+    ],
     devtools: { enabled: true },
-    css: ['~/assets/css/main.css'],
+    css: ['~/assets/css/tailwind.css'],
     compatibilityDate: '2024-04-03',
     eslint: {
         config: {
@@ -11,6 +16,15 @@ export default defineNuxtConfig({
                 quotes: 'single',
                 semi: true,
             },
+        },
+    },
+    supabase: {
+        redirectOptions: {
+            login: '/login',
+            callback: '/confirm',
+            include: undefined,
+            exclude: [],
+            cookieRedirect: false,
         },
     },
 });

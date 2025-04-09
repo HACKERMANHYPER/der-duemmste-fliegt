@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^0.6.1",
+    "@nuxtjs/supabase": "^1.4.5",
     "@nuxtjs/tailwindcss": "^6.12.2"
   },
   "overrides": {

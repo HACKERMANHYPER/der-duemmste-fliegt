@@ -1,8 +1,6 @@
-# Esports Player Voting App for EU
+# "Der Dümmste fliegt" as Twitch Streamer Game
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more about the tech stack.
-
-This project is build with npm in dev only. You may occur problems if using alternatives.
 
 ## Setup
 
@@ -87,3 +85,8 @@ npm run lint:fix
 # bun
 bun run lint:fix
 ```
+
+
+This Project is initially build for [Reval](https://www.twitch.tv/reval) make sure to check him out.
+
+Inspired by many more people that used that format before.

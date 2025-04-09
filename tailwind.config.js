@@ -9,7 +9,9 @@ export default {
                 primary: colors.neutral,
             },
             fontFamily: {
-                sans: ['Times', 'sans-serif'],
+                bodyfam: ['Times', 'sans-serif'],
+                displayfamFirst: ['Times', 'sans-serif'],
+                displayfamSecondary: ['Times', 'sans-serif'],
             },
         },
     },

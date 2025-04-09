@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h1 class="headline1">Startseite</h1>
+        <h1 class="headline1">
+            confirm
+        </h1>
         <p>Current route: {{ route.path }}</p>
         <a
             href="https://nuxt.com/docs/getting-started/routing"

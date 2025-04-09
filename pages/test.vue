@@ -1,5 +1,5 @@
 <template>
     <div>
-        <h2>i suck lol</h2>
+        <h2>TestTestTest</h2>
     </div>
 </template>
