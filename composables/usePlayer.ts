@@ -1,5 +1,3 @@
-import { ref } from 'vue';
-
 export const usePlayer = () => {
     // Nutze useState für SSR-Kompatibilität
     const currentPlayer = useState('currentPlayer', () => null);
@@ -90,15 +88,15 @@ export const usePlayer = () => {
             sessionStorage.removeItem('playerSessionId');
         }
     };
-    const checkSession = () => { 
-        if (import.meta.client) {
-            const sessionId = sessionStorage.getItem('playerSessionId');
-            if (sessionId) {
-                return true;
-            }
-        }
-        return false;
-    }
+    // const checkSession = () => {
+    //     if (import.meta.client) {
+    //         const sessionId = sessionStorage.getItem('playerSessionId');
+    //         if (sessionId) {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // };
     // Initialize session on client
     if (import.meta.client) {
         initSession();
@@ -109,6 +107,5 @@ export const usePlayer = () => {
         login,
         register,
         logout,
-        checkSession
     };
 };

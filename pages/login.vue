@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isReady">
+    <div v-if="checkSession()">
         <h1 class="headline1">
             Login / Registrierung
         </h1>
@@ -38,16 +38,19 @@
 </template>
 
 <script setup lang="ts">
-const { checkSession, login, register, logout, currentPlayer } = usePlayer();
+const { login, register, currentPlayer } = await usePlayer();
 const nickname = ref('');
 const error = ref('');
-const isReady = ref(false);
 
 // Prüfe Session-Status beim Laden
 onBeforeMount(async () => {
-    await login();
-    isReady.value = true;
+    checkSession();
 });
+
+const checkSession = async () => {
+    const player = currentPlayer.value;
+    return player ? true : false;
+};
 
 const handleLogin = async () => {
     if (!nickname.value) {
@@ -79,11 +82,6 @@ const handleRegister = async () => {
         error.value = '';
         nickname.value = '';
     }
-};
-
-const handleLogout = () => {
-    logout();
-    error.value = '';
 };
 </script>
 

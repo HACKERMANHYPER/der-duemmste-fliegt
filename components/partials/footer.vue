@@ -1,6 +1,6 @@
 <template>
     <div class="flex w-full justify-around border">
-        Impressum oder so lol
+        Footer
     </div>
 </template>
 

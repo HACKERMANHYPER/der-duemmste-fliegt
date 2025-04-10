@@ -1,6 +1,6 @@
 <template>
     <div class="flex w-full justify-around border bg-primary-200 text-primary-600">
-        <div class="w-3/4 float-start">
+        <div class="w-1/2 float-start">
             LOGO
         </div>
         <div>
@@ -15,16 +15,18 @@
                 Players
             </NuxtLink>
             <NuxtLink
-                to="/"
+                v-if="currentPlayer"
+                to="/login"
+                @click="logout"
             >
-                More
+                Logout
             </NuxtLink>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-
+const { currentPlayer, logout } = await usePlayer();
 </script>
 
 <style scoped></style>
